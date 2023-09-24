@@ -11,6 +11,6 @@ steps:
     querysuite: 'security-extended'
 - task: AdvancedSecurity-Codeql-Autobuild@1
 
-
+- task: AdvancedSecurity-Dependency-Scanning@1
 - task: AdvancedSecurity-Codeql-Analyze@1
 - task: AdvancedSecurity-Publish@1
