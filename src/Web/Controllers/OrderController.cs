@@ -2,6 +2,8 @@
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.eShopWeb.Infrastructure.Data;
 using Microsoft.eShopWeb.Web.Features.MyOrders;
 using Microsoft.eShopWeb.Web.Features.OrderDetails;
 
@@ -13,10 +15,12 @@ namespace Microsoft.eShopWeb.Web.Controllers;
 public class OrderController : Controller
 {
     private readonly IMediator _mediator;
+    private readonly CatalogContext _dbContext;
 
-    public OrderController(IMediator mediator)
+    public OrderController(IMediator mediator, CatalogContext dbContext)
     {
         _mediator = mediator;
+        _dbContext = dbContext;
     }
 
     [HttpGet]
@@ -40,5 +44,13 @@ public class OrderController : Controller
         }
 
         return View(viewModel);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> AddNewItem(string buyerId, string shipToAddress_Street)
+    {
+        string query = $"INSERT INTO Orders (BuyerId, ShipToAddress_Street) VALUES ({buyerId}, {shipToAddress_Street})";
+        var result =  await _dbContext.Database.ExecuteSqlRawAsync(query);
+        return View(result);
     }
 }
