@@ -14,7 +14,8 @@
 				"ms-vscode.vscode-node-azure-pack",
 				"ms-kubernetes-tools.vscode-kubernetes-tools",
 				"redhat.vscode-yaml",
-				"ms-dotnettools.csdevkit"
+				"ms-dotnettools.csdevkit",
+				"GitHub.copilot"
 			]
 		}
 	},
